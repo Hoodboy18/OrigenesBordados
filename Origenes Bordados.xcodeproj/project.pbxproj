@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A270241A3090E938000B7923 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = A27024193090E938000B7923 /* Lottie */; };
+		A270241D3090EB6A000B7923 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A270241C3090EB6A000B7923 /* FirebaseAuth */; };
+		A270241F3090EB6A000B7923 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A270241E3090EB6A000B7923 /* FirebaseFirestore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		A222055830656B530097B2D6 /* Origenes Bordados.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Origenes Bordados.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +42,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A270241A3090E938000B7923 /* Lottie in Frameworks */,
+				A270241D3090EB6A000B7923 /* FirebaseAuth in Frameworks */,
+				A270241F3090EB6A000B7923 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +87,9 @@
 			);
 			name = "Origenes Bordados";
 			packageProductDependencies = (
+				A27024193090E938000B7923 /* Lottie */,
+				A270241C3090EB6A000B7923 /* FirebaseAuth */,
+				A270241E3090EB6A000B7923 /* FirebaseFirestore */,
 			);
 			productName = "Origenes Bordados";
 			productReference = A222055830656B530097B2D6 /* Origenes Bordados.app */;
@@ -107,6 +119,10 @@
 			);
 			mainGroup = A222054F30656B530097B2D6;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A27024183090E938000B7923 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				A270241B3090EB6A000B7923 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A222055930656B530097B2D6 /* Products */;
 			projectDirPath = "";
@@ -341,6 +357,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A27024183090E938000B7923 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.6.1;
+			};
+		};
+		A270241B3090EB6A000B7923 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A27024193090E938000B7923 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A27024183090E938000B7923 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
+		A270241C3090EB6A000B7923 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A270241B3090EB6A000B7923 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		A270241E3090EB6A000B7923 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A270241B3090EB6A000B7923 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A222055030656B530097B2D6 /* Project object */;
 }
