@@ -36,7 +36,7 @@ protocol SignUpValidatorProtocol {
     func validatePostalCode (_ postalCode: String) -> SignUpValidationError?
 }
 
-struct SignupValidator : SignUpValidatorProtocol {
+/*struct SignupValidator : SignUpValidatorProtocol {
     private let minLength: Int = 8
     
     func validateName(_ name: String) -> SignUpValidationError? {
@@ -59,5 +59,4 @@ struct SignupValidator : SignUpValidatorProtocol {
         return isValid ? nil : .invalidFormat
     }
     
-    func
-}
+}*/
