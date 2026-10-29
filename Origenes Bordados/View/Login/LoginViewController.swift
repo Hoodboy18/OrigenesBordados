@@ -65,6 +65,10 @@ extension LoginViewController: LoginView {
     func setLoginButtonEnabled(_ isEnabled: Bool) {
         loginButton.isEnabled = isEnabled
     }
+    
+    func manageLoader(_ isLoading: Bool) {
+        isLoading ? showLoader() : hideLoader()
+    }
 }
 
 extension LoginViewController: UITextFieldDelegate {

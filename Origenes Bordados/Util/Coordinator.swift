@@ -49,7 +49,7 @@ final class AppDIContainer: ViewControllerFactory {
         let viewController = LoginViewController(presenter: presenter)
         presenter.view = viewController
         
-        return LoginViewController(presenter: presenter)
+        return viewController
     }
     
 }
