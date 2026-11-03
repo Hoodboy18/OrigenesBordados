@@ -11,18 +11,20 @@ protocol LoginView: AnyObject {
     func showEmailError(message: String?)
     func showPasswordError(message :String?)
     func setLoginButtonEnabled(_ isEnabled: Bool)
-    func manageLoader (_ isLoading)
+    func manageLoader (_ isLoading: Bool)
 }
 
 final class LoginPresenter {
     weak var view: LoginView?
     private let onLoginSuccess: () -> Void
     private let validator: LoginValidatorProtocol
+    private let authRepository: AuthRepositoryProtocol
     
     init(onLoginSuccess: @escaping () -> Void,
-         validator: LoginValidatorProtocol) {
+         validator: LoginValidatorProtocol, authRepository: AuthRepositoryProtocol) {
         self.onLoginSuccess = onLoginSuccess
         self.validator = validator
+        self.authRepository = authRepository
     }
     
     func emailDidEndEditing(_ email: String) {
@@ -38,11 +40,18 @@ final class LoginPresenter {
         view?.setLoginButtonEnabled(isFormValid)
     }
     
-    func requestLogin(){
+    func requestLogin(email: String, password: String){
         view?.manageLoader(true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
-            self?.view?.manageLoader(false)
-            self?.onLoginSuccess()
+        Task { @MainActor [weak self] in
+            guard let self = self else { return }
+            do{
+                let user = try await self.authRepository.signIn(email: email, password: password)
+                self.view?.manageLoader(false)
+                self.onLoginSuccess()
+            } catch {
+                self.view?.manageLoader(false)
+                self.view?.showEmailError(message: error.localizedDescription)
+            }
         }
     }
 }

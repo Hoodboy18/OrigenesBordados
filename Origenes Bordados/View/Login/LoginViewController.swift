@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func requestLogin(_ sender: UIButton) {
-        presenter.requestLogin()
+        presenter.requestLogin(email: <#T##String#>, password: <#T##String#>)
     }
 
 }
