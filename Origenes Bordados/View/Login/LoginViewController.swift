@@ -47,6 +47,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func requestLogin(_ sender: UIButton) {
+        presenter.requestLogin(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
     }
 
 }
@@ -67,7 +68,7 @@ extension LoginViewController: LoginView {
     }
     
     func manageLoader(_ isLoading: Bool) {
-        isLoading ? showLoader() : hideLoader()
+        isLoading ? showLoader(): hideLoader()
     }
 }
 

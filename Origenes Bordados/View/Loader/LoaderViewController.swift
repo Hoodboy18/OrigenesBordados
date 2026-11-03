@@ -2,7 +2,7 @@
 //  LoaderViewController.swift
 //  Origenes Bordados
 //
-//  Created by Orígenes Bordados on 29/10/26.
+//  Created by Facultad de Contaduría y Administración on 29/10/26.
 //
 
 import UIKit
@@ -19,7 +19,7 @@ class LoaderViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    private func setupView(){
+    private func setupView() {
         let animation = LottieAnimationView(name: "loader")
         animation.loopMode = .loop
         animation.contentMode = .scaleAspectFit
