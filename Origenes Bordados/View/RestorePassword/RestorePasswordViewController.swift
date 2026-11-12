@@ -16,14 +16,14 @@ class RestorePasswordViewController: UIViewController {
     }
 
 
-    /*
-    // MARK: - Navigation
+    private let presenter: SignUpPresenter
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    init(presenter: SignUpPresenter) {
+        self.presenter = presenter
+        super.init(nibName: "SignUpViewController", bundle: nil)
     }
-    */
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
