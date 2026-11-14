@@ -197,7 +197,8 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func requestLogin(_ sender: UIButton) {
-        // vacío como lo tenías; el presenter lo maneja desde el XIB
+        view.endEditing(true)
+        presenter.requestLogin(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
     }
 }
 
