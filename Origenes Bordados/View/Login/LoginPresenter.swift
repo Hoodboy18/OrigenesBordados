@@ -1,0 +1,51 @@
+//
+//  LoginPresenter.swift
+//  Origenes Bordados
+//
+//  Created by Mario Jasso on 15/10/26.
+//
+
+import Foundation
+
+//todo lo que tiene que ejecutar
+protocol LoginView: AnyObject {
+    func showEmailError(message: String?)
+    func showPasswordError(message :String?)
+    func setLoginButtonEnabled(_ isEnabled: Bool)
+    func manageLoader( _ isLoading: Bool)
+}
+
+final class LoginPresenter {
+    weak var view: LoginView?
+    private let onLoginSuccess: () -> Void
+    private let validator: LoginValidatorProtocol
+    
+    init(onLoginSuccess: @escaping () -> Void,
+         validator: LoginValidatorProtocol) {
+        self.onLoginSuccess = onLoginSuccess
+        self.validator = validator
+    }
+    
+    func emailDidEndEditing(_ email: String) {
+        view?.showEmailError(message: validator.validateEmail(email)?.message)
+    }
+    
+    func passwordDidEndEditing(_ password: String){
+        view?.showPasswordError(message: validator.validatePassword(password)?.message)
+    }
+    
+    func fieldsDidChange(email: String, password: String){
+        let isFormValid = validator.validateEmail(email) == nil && validator.validatePassword(password) == nil
+        view?.setLoginButtonEnabled(isFormValid)
+    }
+    
+    func requestLogin(){
+        view?.manageLoader(true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            [weak self] in
+            self?.view?.manageLoader(false)
+            self?.onLoginSuccess()
+        }
+    }
+}
+
