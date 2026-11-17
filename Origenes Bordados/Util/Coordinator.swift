@@ -64,6 +64,10 @@ protocol ViewControllerFactory {
     func makeSignUpViewController(onSignUpSuccess: @escaping () -> Void,
                                   onBack: @escaping () -> Void) -> UIViewController
     func makePersonalInfoViewController(onSavedPersonalInfo: @escaping () -> Void) -> UIViewController
+    
+    func makeHomeViewController() -> UIViewController
+    
+    func makeProfileViewController() -> UIViewController
 }
 
 // MARK: - DI Container
@@ -105,4 +109,14 @@ final class AppDIContainer: ViewControllerFactory {
         presenter.view = viewController
         return viewController
     }
+    
+    func makeHomeViewController() -> UIViewController {
+        return UIViewController()
+    }
+    
+    func makeProfileViewController() -> UIViewController {
+        return UIViewController()
+    }
 }
+
+
