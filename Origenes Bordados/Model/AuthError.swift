@@ -2,7 +2,7 @@
 //  AuthError.swift
 //  Origenes Bordados
 //
-//  Created by Facultad de Contaduría y Administración on 03/11/26.
+//  Created by Facultad de Contaduría y Administracíon on 12/11/26.
 //
 
 import Foundation
@@ -12,17 +12,17 @@ enum AuthError: LocalizedError {
     case emailAlreadyInUse
     case network
     case unknown
-    
+
     var errorDescription: String? {
         switch self {
         case .invalidCredentials:
-            return "Invalid credentials"
+            return "El correo o la contraseña no son correctos"
         case .emailAlreadyInUse:
-            return "Email already in use"
+            return "Este correo ya está registrado. Inicia sesión"
         case .network:
-            return "Network error"
+            return "No hay conexión a internet. Inténtalo de nuevo"
         case .unknown:
-            return "Unknown error"
+            return "Ocurrió un error inesperado. Inténtalo de nuevo"
         }
     }
 }

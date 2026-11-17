@@ -24,7 +24,8 @@ final class LoginPresenter {
     private let authRepository: AuthRepositoryProtocol
     
     init(onLoginSuccess: @escaping () -> Void,
-         validator: LoginValidatorProtocol, authRepository: AuthRepositoryProtocol) {
+         validator: LoginValidatorProtocol,
+         authRepository: AuthRepositoryProtocol) {
         self.onLoginSuccess = onLoginSuccess
         self.validator = validator
         self.authRepository = authRepository
@@ -43,12 +44,13 @@ final class LoginPresenter {
         view?.setLoginButtonEnabled(isFormValid)
     }
     
-    func requestLogin(email: String, password: String){
+    func requestLogin(email: String, password: String) {
+        let email = email.trimmingCharacters(in: .whitespaces)
         view?.manageLoader(true)
         Task { @MainActor [weak self] in
             guard let self = self else { return }
             do {
-                let user = try await self.authRepository.signIn(email: email, password: password)
+                _ = try await self.authRepository.signIn(email: email, password: password)
                 self.view?.manageLoader(false)
                 self.onLoginSuccess()
             } catch {
