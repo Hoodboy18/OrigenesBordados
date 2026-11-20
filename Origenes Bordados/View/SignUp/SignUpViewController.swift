@@ -14,26 +14,34 @@ class SignUpViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var headerCard: UIView!
     @IBOutlet private weak var section1: UIView!
-    @IBOutlet private weak var section2: UIView!
-    @IBOutlet private weak var section3: UIView!
-    @IBOutlet private weak var nameField: UITextField!
     @IBOutlet private weak var emailField: UITextField!
-    @IBOutlet private weak var phoneField: UITextField!
     @IBOutlet private weak var passwordField: UITextField!
-    @IBOutlet private weak var confirmPasswordField: UITextField!
-    @IBOutlet private weak var addressField: UITextField!
-    @IBOutlet private weak var cityField: UITextField!
+    @IBOutlet private weak var emailErrorLabel: UILabel!
+    @IBOutlet private weak var passwordErrorLabel: UILabel!
     @IBOutlet private weak var signUpButton: UIButton!
     @IBOutlet private weak var backButton: UIButton!
 
     // MARK: - Properties
+    private let presenter: SignUpPresenter
     private let gradientLayer = CAGradientLayer()
     private let blobLayer = CALayer()
     private let shadowTint = UIColor(named: "shadowTint") ?? UIColor.black
 
+    // MARK: - Init
+    init(presenter: SignUpPresenter) {
+        self.presenter = presenter
+        super.init(nibName: "SignUpViewController", bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        // La pantalla ya tiene su propio botón de regresar
+        navigationItem.hidesBackButton = true
         setupGradient()
         setupOrganicBlobs()
         setupCardShadows()
@@ -151,23 +159,18 @@ class SignUpViewController: UIViewController {
 
     // MARK: - Cards & Shadows
     private func setupCardShadows() {
-        [headerCard, section1, section2, section3].forEach { card in
+        [headerCard, section1].forEach { card in
             guard let card = card else { return }
             card.layer.masksToBounds = false
             card.layer.shadowColor = shadowTint.cgColor
             card.layer.shadowOffset = CGSize(width: 0, height: 14)
             card.layer.shadowRadius = 26
             card.layer.shadowOpacity = traitCollection.userInterfaceStyle == .dark ? 0.35 : 0.14
-
-            if card === section2 {
-                card.layer.shadowColor = (UIColor(named: "accent") ?? shadowTint).cgColor
-                card.layer.shadowOpacity = traitCollection.userInterfaceStyle == .dark ? 0.25 : 0.12
-            }
         }
     }
 
     private func applyCardShadowPaths() {
-        [headerCard, section1, section2, section3].forEach { card in
+        [headerCard, section1].forEach { card in
             guard let card = card else { return }
             let path = UIBezierPath(roundedRect: card.bounds,
                                     cornerRadius: card.layer.cornerRadius).cgPath
@@ -210,8 +213,7 @@ class SignUpViewController: UIViewController {
 
     // MARK: - Fields
     private func setupFields() {
-        let fields = [nameField, emailField, phoneField, passwordField,
-                      confirmPasswordField, addressField, cityField]
+        let fields = [emailField, passwordField]
         let placeholderColor = UIColor(named: "textSecondary") ?? .secondaryLabel
         let accentColor = UIColor(named: "accent") ?? .systemOrange
 
@@ -229,6 +231,7 @@ class SignUpViewController: UIViewController {
             field.layer.borderWidth = 0
             field.layer.borderColor = accentColor.cgColor
             field.delegate = self
+            field.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         }
     }
 
@@ -264,20 +267,22 @@ class SignUpViewController: UIViewController {
 
     @objc private func dismissKeyboard() { view.endEditing(true) }
 
+    @objc private func textDidChange() {
+        presenter.fieldsDidChange(email: emailField.text ?? "", password: passwordField.text ?? "")
+    }
+
     @objc private func backTapped() {
-        if let nav = navigationController { nav.popViewController(animated: true) }
-        else { dismiss(animated: true) }
+        presenter.goBack()
     }
 
     @objc private func signUpTapped() {
         view.endEditing(true)
-        guard validate() else { return }
-        print("Formulario válido ✅")
+        presenter.requestSignUp(email: emailField.text ?? "", password: passwordField.text ?? "")
     }
 
     // MARK: - Entrance Animation
     private func animateEntrance() {
-        let cards: [UIView?] = [headerCard, section1, section2, section3]
+        let cards: [UIView?] = [headerCard, section1]
         cards.enumerated().forEach { index, card in
             guard let card = card else { return }
             card.alpha = 0
@@ -299,46 +304,31 @@ class SignUpViewController: UIViewController {
                        usingSpringWithDamping: 0.7,
                        initialSpringVelocity: 0.8,
                        options: [.curveEaseOut]) {
-            self.signUpButton.alpha = 1
+            self.signUpButton.alpha = self.signUpButton.isEnabled ? 1 : 0.5
             self.signUpButton.transform = .identity
         }
     }
+}
 
-    // MARK: - Validation
-    private func validate() -> Bool {
-        guard let name = nameField.text?.trimmingCharacters(in: .whitespaces), !name.isEmpty else {
-            showAlert("Ingresa tu nombre completo"); return false
-        }
-        guard let email = emailField.text, isValidEmail(email) else {
-            showAlert("Ingresa un correo válido"); return false
-        }
-        guard let phone = phoneField.text, phone.count >= 10 else {
-            showAlert("Ingresa un teléfono válido"); return false
-        }
-        guard let pass = passwordField.text, pass.count >= 6 else {
-            showAlert("La contraseña debe tener al menos 6 caracteres"); return false
-        }
-        guard pass == confirmPasswordField.text else {
-            showAlert("Las contraseñas no coinciden"); return false
-        }
-        guard let address = addressField.text, !address.isEmpty else {
-            showAlert("Ingresa tu dirección"); return false
-        }
-        guard let city = cityField.text, !city.isEmpty else {
-            showAlert("Ingresa tu ciudad"); return false
-        }
-        return true
+// MARK: - SignUpView
+extension SignUpViewController: SignUpView {
+    func showEmailError(message: String?) {
+        emailErrorLabel.text = message
+        emailErrorLabel.isHidden = message == nil
     }
 
-    private func isValidEmail(_ email: String) -> Bool {
-        let regex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
-        return email.range(of: regex, options: .regularExpression) != nil
+    func showPasswordError(message: String?) {
+        passwordErrorLabel.text = message
+        passwordErrorLabel.isHidden = message == nil
     }
 
-    private func showAlert(_ message: String) {
-        let alert = UIAlertController(title: "Revisa tus datos", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+    func setSignUpButtonEnabled(_ isEnabled: Bool) {
+        signUpButton.isEnabled = isEnabled
+        signUpButton.alpha = isEnabled ? 1 : 0.5
+    }
+
+    func manageLoader(_ isLoading: Bool) {
+        isLoading ? showLoader() : hideLoader()
     }
 }
 
@@ -354,18 +344,18 @@ extension SignUpViewController: UITextFieldDelegate {
         UIView.animate(withDuration: 0.2) {
             textField.layer.borderWidth = 0
         }
+        if textField == emailField {
+            presenter.emailDidEndEditing(textField.text ?? "")
+        } else {
+            presenter.passwordDidEndEditing(textField.text ?? "")
+        }
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case nameField:            emailField.becomeFirstResponder()
-        case emailField:           phoneField.becomeFirstResponder()
-        case phoneField:           passwordField.becomeFirstResponder()
-        case passwordField:        confirmPasswordField.becomeFirstResponder()
-        case confirmPasswordField: addressField.becomeFirstResponder()
-        case addressField:         cityField.becomeFirstResponder()
-        case cityField:            textField.resignFirstResponder()
-        default:                   textField.resignFirstResponder()
+        if textField == emailField {
+            passwordField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
         }
         return true
     }

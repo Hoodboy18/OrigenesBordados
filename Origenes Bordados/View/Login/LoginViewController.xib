@@ -17,6 +17,9 @@
                 <outlet property="loginButton" destination="zos-vg-3pC" id="m2n-gg-4Pm"/>
                 <outlet property="emailErrorLabel" destination="a4C-0a-1Xe" id="115-Uu-VLL"/>
                 <outlet property="passwordErrorLabel" destination="EYY-iq-4gh" id="5YW-WS-0AH"/>
+                <outlet property="gradientView" destination="GRD-view-001" id="out-gradient"/>
+                <outlet property="scrollView" destination="SCR-main-001" id="out-scroll"/>
+                <outlet property="loginCard" destination="CRD-login-001" id="out-login-card"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

@@ -117,4 +117,8 @@ class WelcomeViewController: UIViewController {
     @IBAction func showLogin(_ sender: UIButton) {
         presenter.showLogin()
     }
+
+    @IBAction func showSignUp(_ sender: UIButton) {
+        presenter.showSignUp()
+    }
 }

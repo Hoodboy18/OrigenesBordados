@@ -16,15 +16,10 @@
                 <outlet property="scrollView" destination="SCR-main-001" id="out-scroll"/>
                 <outlet property="headerCard" destination="HDR-card-001" id="out-header-card"/>
                 <outlet property="section1" destination="SEC-1-001" id="out-sec1"/>
-                <outlet property="section2" destination="SEC-2-001" id="out-sec2"/>
-                <outlet property="section3" destination="SEC-3-001" id="out-sec3"/>
-                <outlet property="nameField" destination="FLD-name-001" id="out-name"/>
                 <outlet property="emailField" destination="FLD-mail-001" id="out-mail"/>
-                <outlet property="phoneField" destination="FLD-phone-001" id="out-phone"/>
                 <outlet property="passwordField" destination="FLD-pass-001" id="out-pass"/>
-                <outlet property="confirmPasswordField" destination="FLD-pass2-001" id="out-pass2"/>
-                <outlet property="addressField" destination="FLD-addr-001" id="out-addr"/>
-                <outlet property="cityField" destination="FLD-city-001" id="out-city"/>
+                <outlet property="emailErrorLabel" destination="ERR-mail-001" id="out-mail-err"/>
+                <outlet property="passwordErrorLabel" destination="ERR-pass-001" id="out-pass-err"/>
                 <outlet property="signUpButton" destination="BTN-signup-001" id="out-signup"/>
                 <outlet property="backButton" destination="BTN-back-001" id="out-back"/>
             </connections>
@@ -39,20 +34,6 @@
                     <color key="backgroundColor" name="gradientTop"/>
                 </view>
 
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTN-back-001">
-                    <rect key="frame" x="20" y="56" width="44" height="44"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="44" id="back-w"/>
-                        <constraint firstAttribute="height" constant="44" id="back-h"/>
-                    </constraints>
-                    <color key="backgroundColor" name="cardSurface"/>
-                    <color key="tintColor" name="textPrimary"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <real key="value" value="22"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </button>
 
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="SCR-main-001">
                     <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
@@ -85,7 +66,7 @@
                                             <color key="textColor" name="textPrimary"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Únete a nuestra comunidad artesanal." textAlignment="left" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SUB-head-001">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Únete para adquirir piezas exclusivas de nuestros artesanos." textAlignment="left" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SUB-head-001">
                                             <rect key="frame" x="28" y="150" width="294" height="18"/>
                                             <fontDescription key="fontDescription" type="system" weight="regular" pointSize="14"/>
                                             <color key="textColor" name="textSecondary"/>
@@ -133,161 +114,75 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TUS DATOS" textAlignment="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEC1-ttl-001">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TU CUENTA" textAlignment="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEC1-ttl-001">
                                             <rect key="frame" x="80" y="30" width="242" height="16"/>
                                             <fontDescription key="fontDescription" type="system" weight="bold" pointSize="13"/>
                                             <color key="textColor" name="textPrimary"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nombre completo" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="FLD-name-001">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Correo electrónico" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="FLD-mail-001">
                                             <rect key="frame" x="28" y="72" width="294" height="48"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="48" id="name-h"/>
+                                                <constraint firstAttribute="height" constant="48" id="FLD-mail-001-h"/>
                                             </constraints>
                                             <color key="backgroundColor" name="inputFill"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" name="textPrimary"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name" returnKeyType="next"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="emailAddress" returnKeyType="next" autocapitalizationType="none" autocorrectionType="no"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                     <real key="value" value="18"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </textField>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Correo electrónico" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="FLD-mail-001">
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="left" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERR-mail-001">
+                                            <rect key="frame" x="32" y="124" width="286" height="0.0"/>
+                                            <fontDescription key="fontDescription" type="system" weight="regular" pointSize="12"/>
+                                            <color key="textColor" name="accent"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Contraseña" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="FLD-pass-001">
                                             <rect key="frame" x="28" y="132" width="294" height="48"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="48" id="mail-h"/>
+                                                <constraint firstAttribute="height" constant="48" id="FLD-pass-001-h"/>
                                             </constraints>
                                             <color key="backgroundColor" name="inputFill"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" name="textPrimary"/>
-                                            <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="emailAddress" returnKeyType="next"/>
+                                            <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="newPassword" returnKeyType="done"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                     <real key="value" value="18"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </textField>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Teléfono" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="FLD-phone-001">
-                                            <rect key="frame" x="28" y="192" width="294" height="48"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="48" id="phone-h"/>
-                                            </constraints>
-                                            <color key="backgroundColor" name="inputFill"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" name="textPrimary"/>
-                                            <textInputTraits key="textInputTraits" keyboardType="phonePad" textContentType="telephoneNumber" returnKeyType="next"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <real key="value" value="18"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </textField>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="left" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERR-pass-001">
+                                            <rect key="frame" x="32" y="184" width="286" height="0.0"/>
+                                            <fontDescription key="fontDescription" type="system" weight="regular" pointSize="12"/>
+                                            <color key="textColor" name="accent"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" name="cardSurface"/>
                                     <constraints>
                                         <constraint firstItem="CHIP-1-001" firstAttribute="top" secondItem="SEC-1-001" secondAttribute="top" constant="24" id="chip1-top"/>
                                         <constraint firstItem="CHIP-1-001" firstAttribute="leading" secondItem="SEC-1-001" secondAttribute="leading" constant="28" id="chip1-lead"/>
-
                                         <constraint firstItem="SEC1-ttl-001" firstAttribute="leading" secondItem="CHIP-1-001" secondAttribute="trailing" constant="12" id="s1ttl-lead"/>
                                         <constraint firstItem="SEC1-ttl-001" firstAttribute="centerY" secondItem="CHIP-1-001" secondAttribute="centerY" id="s1ttl-cy"/>
                                         <constraint firstAttribute="trailing" secondItem="SEC1-ttl-001" secondAttribute="trailing" constant="28" id="s1ttl-trail"/>
-
-                                        <constraint firstItem="FLD-name-001" firstAttribute="top" secondItem="CHIP-1-001" secondAttribute="bottom" constant="20" id="name-top"/>
-                                        <constraint firstItem="FLD-name-001" firstAttribute="leading" secondItem="SEC-1-001" secondAttribute="leading" constant="28" id="name-lead"/>
-                                        <constraint firstAttribute="trailing" secondItem="FLD-name-001" secondAttribute="trailing" constant="28" id="name-trail"/>
-
-                                        <constraint firstItem="FLD-mail-001" firstAttribute="top" secondItem="FLD-name-001" secondAttribute="bottom" constant="12" id="mail-top"/>
+                                        <constraint firstItem="FLD-mail-001" firstAttribute="top" secondItem="CHIP-1-001" secondAttribute="bottom" constant="20" id="mail-top"/>
                                         <constraint firstItem="FLD-mail-001" firstAttribute="leading" secondItem="SEC-1-001" secondAttribute="leading" constant="28" id="mail-lead"/>
                                         <constraint firstAttribute="trailing" secondItem="FLD-mail-001" secondAttribute="trailing" constant="28" id="mail-trail"/>
-
-                                        <constraint firstItem="FLD-phone-001" firstAttribute="top" secondItem="FLD-mail-001" secondAttribute="bottom" constant="12" id="phone-top"/>
-                                        <constraint firstItem="FLD-phone-001" firstAttribute="leading" secondItem="SEC-1-001" secondAttribute="leading" constant="28" id="phone-lead"/>
-                                        <constraint firstAttribute="trailing" secondItem="FLD-phone-001" secondAttribute="trailing" constant="28" id="phone-trail"/>
-                                        <constraint firstAttribute="bottom" secondItem="FLD-phone-001" secondAttribute="bottom" constant="28" id="s1-bottom"/>
-                                    </constraints>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <real key="value" value="32"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </view>
-
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SEC-2-001">
-                                    <rect key="frame" x="20" y="632" width="350" height="240"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHIP-2-001">
-                                            <rect key="frame" x="28" y="24" width="40" height="28"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="chip2-w"/>
-                                                <constraint firstAttribute="height" constant="28" id="chip2-h"/>
-                                            </constraints>
-                                            <color key="backgroundColor" name="accent"/>
-                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
-                                            <color key="textColor" name="cardSurface"/>
-                                            <nil key="highlightedColor"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <real key="value" value="14"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SEGURIDAD" textAlignment="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEC2-ttl-001">
-                                            <rect key="frame" x="80" y="30" width="242" height="16"/>
-                                            <fontDescription key="fontDescription" type="system" weight="bold" pointSize="13"/>
-                                            <color key="textColor" name="textPrimary"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Contraseña" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="FLD-pass-001">
-                                            <rect key="frame" x="28" y="72" width="294" height="48"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="48" id="pass-h"/>
-                                            </constraints>
-                                            <color key="backgroundColor" name="inputFill"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" name="textPrimary"/>
-                                            <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="newPassword" returnKeyType="next"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <real key="value" value="18"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </textField>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirmar contraseña" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="FLD-pass2-001">
-                                            <rect key="frame" x="28" y="132" width="294" height="48"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="48" id="pass2-h"/>
-                                            </constraints>
-                                            <color key="backgroundColor" name="inputFill"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" name="textPrimary"/>
-                                            <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="newPassword" returnKeyType="next"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <real key="value" value="18"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </textField>
-                                    </subviews>
-                                    <color key="backgroundColor" name="cardSurfaceAlt"/>
-                                    <constraints>
-                                        <constraint firstItem="CHIP-2-001" firstAttribute="top" secondItem="SEC-2-001" secondAttribute="top" constant="24" id="chip2-top"/>
-                                        <constraint firstItem="CHIP-2-001" firstAttribute="leading" secondItem="SEC-2-001" secondAttribute="leading" constant="28" id="chip2-lead"/>
-
-                                        <constraint firstItem="SEC2-ttl-001" firstAttribute="leading" secondItem="CHIP-2-001" secondAttribute="trailing" constant="12" id="s2ttl-lead"/>
-                                        <constraint firstItem="SEC2-ttl-001" firstAttribute="centerY" secondItem="CHIP-2-001" secondAttribute="centerY" id="s2ttl-cy"/>
-                                        <constraint firstAttribute="trailing" secondItem="SEC2-ttl-001" secondAttribute="trailing" constant="28" id="s2ttl-trail"/>
-
-                                        <constraint firstItem="FLD-pass-001" firstAttribute="top" secondItem="CHIP-2-001" secondAttribute="bottom" constant="20" id="pass-top"/>
-                                        <constraint firstItem="FLD-pass-001" firstAttribute="leading" secondItem="SEC-2-001" secondAttribute="leading" constant="28" id="pass-lead"/>
+                                        <constraint firstItem="ERR-mail-001" firstAttribute="top" secondItem="FLD-mail-001" secondAttribute="bottom" constant="4" id="mailerr-top"/>
+                                        <constraint firstItem="ERR-mail-001" firstAttribute="leading" secondItem="SEC-1-001" secondAttribute="leading" constant="32" id="mailerr-lead"/>
+                                        <constraint firstAttribute="trailing" secondItem="ERR-mail-001" secondAttribute="trailing" constant="32" id="mailerr-trail"/>
+                                        <constraint firstItem="FLD-pass-001" firstAttribute="top" secondItem="ERR-mail-001" secondAttribute="bottom" constant="8" id="pass-top"/>
+                                        <constraint firstItem="FLD-pass-001" firstAttribute="leading" secondItem="SEC-1-001" secondAttribute="leading" constant="28" id="pass-lead"/>
                                         <constraint firstAttribute="trailing" secondItem="FLD-pass-001" secondAttribute="trailing" constant="28" id="pass-trail"/>
-
-                                        <constraint firstItem="FLD-pass2-001" firstAttribute="top" secondItem="FLD-pass-001" secondAttribute="bottom" constant="12" id="pass2-top"/>
-                                        <constraint firstItem="FLD-pass2-001" firstAttribute="leading" secondItem="SEC-2-001" secondAttribute="leading" constant="28" id="pass2-lead"/>
-                                        <constraint firstAttribute="trailing" secondItem="FLD-pass2-001" secondAttribute="trailing" constant="28" id="pass2-trail"/>
-                                        <constraint firstAttribute="bottom" secondItem="FLD-pass2-001" secondAttribute="bottom" constant="28" id="s2-bottom"/>
+                                        <constraint firstItem="ERR-pass-001" firstAttribute="top" secondItem="FLD-pass-001" secondAttribute="bottom" constant="4" id="passerr-top"/>
+                                        <constraint firstItem="ERR-pass-001" firstAttribute="leading" secondItem="SEC-1-001" secondAttribute="leading" constant="32" id="passerr-lead"/>
+                                        <constraint firstAttribute="trailing" secondItem="ERR-pass-001" secondAttribute="trailing" constant="32" id="passerr-trail"/>
+                                        <constraint firstAttribute="bottom" secondItem="ERR-pass-001" secondAttribute="bottom" constant="28" id="s1-bottom"/>
                                     </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -296,96 +191,14 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
 
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SEC-3-001">
-                                    <rect key="frame" x="20" y="888" width="350" height="240"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="03" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHIP-3-001">
-                                            <rect key="frame" x="28" y="24" width="40" height="28"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="chip3-w"/>
-                                                <constraint firstAttribute="height" constant="28" id="chip3-h"/>
-                                            </constraints>
-                                            <color key="backgroundColor" name="secondary"/>
-                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
-                                            <color key="textColor" name="textPrimary"/>
-                                            <nil key="highlightedColor"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <real key="value" value="14"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ENVÍO" textAlignment="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEC3-ttl-001">
-                                            <rect key="frame" x="80" y="30" width="242" height="16"/>
-                                            <fontDescription key="fontDescription" type="system" weight="bold" pointSize="13"/>
-                                            <color key="textColor" name="textPrimary"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Dirección" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="FLD-addr-001">
-                                            <rect key="frame" x="28" y="72" width="294" height="48"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="48" id="addr-h"/>
-                                            </constraints>
-                                            <color key="backgroundColor" name="inputFill"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" name="textPrimary"/>
-                                            <textInputTraits key="textInputTraits" textContentType="fullStreetAddress" returnKeyType="next"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <real key="value" value="18"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </textField>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ciudad" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="FLD-city-001">
-                                            <rect key="frame" x="28" y="132" width="294" height="48"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="48" id="city-h"/>
-                                            </constraints>
-                                            <color key="backgroundColor" name="inputFill"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" name="textPrimary"/>
-                                            <textInputTraits key="textInputTraits" textContentType="addressCity" returnKeyType="done"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <real key="value" value="18"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </textField>
-                                    </subviews>
-                                    <color key="backgroundColor" name="cardSurface"/>
-                                    <constraints>
-                                        <constraint firstItem="CHIP-3-001" firstAttribute="top" secondItem="SEC-3-001" secondAttribute="top" constant="24" id="chip3-top"/>
-                                        <constraint firstItem="CHIP-3-001" firstAttribute="leading" secondItem="SEC-3-001" secondAttribute="leading" constant="28" id="chip3-lead"/>
-
-                                        <constraint firstItem="SEC3-ttl-001" firstAttribute="leading" secondItem="CHIP-3-001" secondAttribute="trailing" constant="12" id="s3ttl-lead"/>
-                                        <constraint firstItem="SEC3-ttl-001" firstAttribute="centerY" secondItem="CHIP-3-001" secondAttribute="centerY" id="s3ttl-cy"/>
-                                        <constraint firstAttribute="trailing" secondItem="SEC3-ttl-001" secondAttribute="trailing" constant="28" id="s3ttl-trail"/>
-
-                                        <constraint firstItem="FLD-addr-001" firstAttribute="top" secondItem="CHIP-3-001" secondAttribute="bottom" constant="20" id="addr-top"/>
-                                        <constraint firstItem="FLD-addr-001" firstAttribute="leading" secondItem="SEC-3-001" secondAttribute="leading" constant="28" id="addr-lead"/>
-                                        <constraint firstAttribute="trailing" secondItem="FLD-addr-001" secondAttribute="trailing" constant="28" id="addr-trail"/>
-
-                                        <constraint firstItem="FLD-city-001" firstAttribute="top" secondItem="FLD-addr-001" secondAttribute="bottom" constant="12" id="city-top"/>
-                                        <constraint firstItem="FLD-city-001" firstAttribute="leading" secondItem="SEC-3-001" secondAttribute="leading" constant="28" id="city-lead"/>
-                                        <constraint firstAttribute="trailing" secondItem="FLD-city-001" secondAttribute="trailing" constant="28" id="city-trail"/>
-                                        <constraint firstAttribute="bottom" secondItem="FLD-city-001" secondAttribute="bottom" constant="28" id="s3-bottom"/>
-                                    </constraints>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <real key="value" value="32"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </view>
-
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTN-signup-001">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" enabled="NO" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTN-signup-001">
                                     <rect key="frame" x="20" y="1152" width="350" height="56"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="56" id="signup-h"/>
                                     </constraints>
                                     <color key="backgroundColor" name="primary"/>
                                     <fontDescription key="fontDescription" type="system" weight="bold" pointSize="17"/>
-                                    <state key="normal" title="Crear cuenta">
+                                    <state key="normal" title="Registrarme">
                                         <color key="titleColor" name="textPrimary"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -418,15 +231,9 @@
                                 <constraint firstItem="SEC-1-001" firstAttribute="leading" secondItem="CNT-form-001" secondAttribute="leading" constant="20" id="s1-lead"/>
                                 <constraint firstAttribute="trailing" secondItem="SEC-1-001" secondAttribute="trailing" constant="20" id="s1-trail"/>
 
-                                <constraint firstItem="SEC-2-001" firstAttribute="top" secondItem="SEC-1-001" secondAttribute="bottom" constant="16" id="s2-top"/>
-                                <constraint firstItem="SEC-2-001" firstAttribute="leading" secondItem="CNT-form-001" secondAttribute="leading" constant="20" id="s2-lead"/>
-                                <constraint firstAttribute="trailing" secondItem="SEC-2-001" secondAttribute="trailing" constant="20" id="s2-trail"/>
 
-                                <constraint firstItem="SEC-3-001" firstAttribute="top" secondItem="SEC-2-001" secondAttribute="bottom" constant="16" id="s3-top"/>
-                                <constraint firstItem="SEC-3-001" firstAttribute="leading" secondItem="CNT-form-001" secondAttribute="leading" constant="20" id="s3-lead"/>
-                                <constraint firstAttribute="trailing" secondItem="SEC-3-001" secondAttribute="trailing" constant="20" id="s3-trail"/>
 
-                                <constraint firstItem="BTN-signup-001" firstAttribute="top" secondItem="SEC-3-001" secondAttribute="bottom" constant="24" id="btn-top"/>
+                                <constraint firstItem="BTN-signup-001" firstAttribute="top" secondItem="SEC-1-001" secondAttribute="bottom" constant="24" id="btn-top"/>
                                 <constraint firstItem="BTN-signup-001" firstAttribute="leading" secondItem="CNT-form-001" secondAttribute="leading" constant="20" id="btn-lead"/>
                                 <constraint firstAttribute="trailing" secondItem="BTN-signup-001" secondAttribute="trailing" constant="20" id="btn-trail"/>
 
@@ -449,6 +256,20 @@
                         <constraint firstItem="CNT-form-001" firstAttribute="width" secondItem="SCR-main-001" secondAttribute="width" id="scr-cnt-width"/>
                     </constraints>
                 </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTN-back-001">
+                    <rect key="frame" x="20" y="56" width="44" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="back-w"/>
+                        <constraint firstAttribute="height" constant="44" id="back-h"/>
+                    </constraints>
+                    <color key="backgroundColor" name="cardSurface"/>
+                    <color key="tintColor" name="textPrimary"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <real key="value" value="22"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="mainBackground"/>

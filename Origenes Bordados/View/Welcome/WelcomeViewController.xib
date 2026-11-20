@@ -136,10 +136,55 @@ con alma.</string>
                     <color key="textColor" name="textSecondary"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTN-login-001">
+                    <rect key="frame" x="32" y="622" width="329" height="52"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="52" id="BTN-login-001-h"/>
+                    </constraints>
+                    <color key="backgroundColor" name="primary"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                    <state key="normal" title="Iniciar sesión">
+                        <color key="titleColor" name="textPrimary"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <real key="value" value="26"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="showLogin:" destination="-1" eventType="touchUpInside" id="BTN-login-001-act"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTN-signup-001">
+                    <rect key="frame" x="32" y="686" width="329" height="52"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="52" id="BTN-signup-001-h"/>
+                    </constraints>
+                    <color key="backgroundColor" name="secondary"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                    <state key="normal" title="Registrarse">
+                        <color key="titleColor" name="textPrimary"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <real key="value" value="26"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="showSignUp:" destination="-1" eventType="touchUpInside" id="BTN-signup-001-act"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="mainBackground"/>
             <constraints>
+                <constraint firstItem="BTN-login-001" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="btn-login-lead"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="BTN-login-001" secondAttribute="trailing" constant="32" id="btn-login-trail"/>
+                <constraint firstItem="BTN-login-001" firstAttribute="top" relation="greaterThanOrEqual" secondItem="TAG-lbl-001" secondAttribute="bottom" constant="20" id="btn-login-gap"/>
+                <constraint firstItem="BTN-signup-001" firstAttribute="top" secondItem="BTN-login-001" secondAttribute="bottom" constant="12" id="btn-signup-top"/>
+                <constraint firstItem="BTN-signup-001" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="btn-signup-lead"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="BTN-signup-001" secondAttribute="trailing" constant="32" id="btn-signup-trail"/>
+                <constraint firstItem="FTR-lbl-001" firstAttribute="top" secondItem="BTN-signup-001" secondAttribute="bottom" constant="20" id="btn-signup-bottom"/>
                 <constraint firstAttribute="bottom" secondItem="ARC-view-001" secondAttribute="bottom" constant="-120" id="arc-bottom"/>
                 <constraint firstAttribute="trailing" secondItem="ARC-view-001" secondAttribute="trailing" constant="-80" id="arc-trail"/>
                 <constraint firstItem="BLOB-right-001" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="180" id="blob-right-top"/>
@@ -161,7 +206,8 @@ con alma.</string>
                 <constraint firstItem="TAG-lbl-001" firstAttribute="top" secondItem="SUB-lbl-001" secondAttribute="bottom" constant="24" id="tag-top"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TAG-lbl-001" secondAttribute="trailing" constant="32" id="tag-trail"/>
                 <constraint firstItem="nLW-3u-WWK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="title-lead"/>
-                <constraint firstItem="nLW-3u-WWK" firstAttribute="top" secondItem="CNT-top-001" secondAttribute="bottom" constant="140" id="title-top"/>
+                <constraint firstItem="nLW-3u-WWK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CNT-top-001" secondAttribute="bottom" constant="24" id="title-top-min"/>
+                <constraint firstItem="nLW-3u-WWK" firstAttribute="top" secondItem="CNT-top-001" secondAttribute="bottom" priority="750" constant="140" id="title-top"/>
                 <constraint firstAttribute="trailing" secondItem="nLW-3u-WWK" secondAttribute="trailing" constant="32" id="title-trail"/>
             </constraints>
             <point key="canvasLocation" x="138.1679389312977" y="153.52112676056339"/>
