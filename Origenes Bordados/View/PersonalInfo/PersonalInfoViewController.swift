@@ -7,16 +7,23 @@ import UIKit
 
 class PersonalInfoViewController: UIViewController {
 
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var lastNameTextField: UITextField!
-    @IBOutlet weak var phoneTextField: UITextField!
-    @IBOutlet weak var nameErrorLabel: UILabel!
-    @IBOutlet weak var lastNameErrorLabel: UILabel!
-    @IBOutlet weak var phoneErrorLabel: UILabel!
-    @IBOutlet weak var saveButton: UIButton!
+    // MARK: - Outlets
+    @IBOutlet private weak var nameField: FormFieldView!
+    @IBOutlet private weak var lastNameField: FormFieldView!
+    @IBOutlet private weak var phoneField: FormFieldView!
+    @IBOutlet private weak var saveButton: UIButton!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var scrollBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var stepLabel: UILabel!
+    @IBOutlet private weak var patternView: TalaveraPatternView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var subtitleLabel: UILabel!
+
+    // MARK: - Properties
     private let presenter: PersonalInfoPresenter
     private let phoneLength = 10
 
+    // MARK: - Init
     init(presenter: PersonalInfoPresenter) {
         self.presenter = presenter
         super.init(nibName: "PersonalInfoViewController", bundle: nil)
@@ -26,63 +33,67 @@ class PersonalInfoViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
     func setupView() {
-        // La cuenta ya existe: no tiene sentido regresar a SignUp
-        navigationItem.hidesBackButton = true
+        view.backgroundColor = Theme.Color.background
+        followKeyboard()
 
-        [nameTextField, lastNameTextField, phoneTextField].forEach { field in
-            field?.delegate = self
-            field?.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        stepLabel.applyEyebrowStyle(kern: 1.5)
+        titleLabel.applyTitleStyle()
+        subtitleLabel.applyBodyStyle()
+
+        [nameField, lastNameField, phoneField].forEach { field in
+            field?.textField.delegate = self
+            field?.textField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         }
-        phoneTextField.inputAccessoryView = makePhoneToolbar()
         saveButton.isEnabled = false
+
+        view.addGestureRecognizer(DismissKeyboardTapGesture(hostView: view))
     }
 
-    // El teclado numérico no tiene tecla "Listo"
-    private func makePhoneToolbar() -> UIToolbar {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let spacer = UIBarButtonItem(systemItem: .flexibleSpace)
-        let done = UIBarButtonItem(systemItem: .done, primaryAction: UIAction { [weak self] _ in
-            self?.phoneTextField.resignFirstResponder()
-        })
-        toolbar.items = [spacer, done]
-        return toolbar
+    /// El scroll termina donde empieza el teclado, así el botón nunca queda tapado.
+    private func followKeyboard() {
+        scrollBottomConstraint.isActive = false
+        scrollView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor).isActive = true
     }
 
+    // MARK: - Actions
     @objc private func textDidChange() {
-        presenter.fieldsDidChange(name: nameTextField.text ?? "",
-                                  lastName: lastNameTextField.text ?? "",
-                                  phone: phoneTextField.text ?? "")
+        presenter.fieldsDidChange(name: nameField.text,
+                                  lastName: lastNameField.text,
+                                  phone: phoneField.text)
     }
 
     @IBAction func requestSave(_ sender: UIButton) {
         view.endEditing(true)
-        presenter.didTapSave(name: nameTextField.text ?? "",
-                             lastName: lastNameTextField.text ?? "",
-                             phone: phoneTextField.text ?? "")
+        presenter.didTapSave(name: nameField.text,
+                             lastName: lastNameField.text,
+                             phone: phoneField.text)
     }
 }
 
+// MARK: - PersonalView
 extension PersonalInfoViewController: PersonalView {
     func showNameError(message: String?) {
-        nameErrorLabel.text = message
-        nameErrorLabel.isHidden = message == nil
+        nameField.setError(message)
     }
 
     func showLastNameError(message: String?) {
-        lastNameErrorLabel.text = message
-        lastNameErrorLabel.isHidden = message == nil
+        lastNameField.setError(message)
     }
 
     func showPhoneError(message: String?) {
-        phoneErrorLabel.text = message
-        phoneErrorLabel.isHidden = message == nil
+        phoneField.setError(message)
     }
 
     func setSaveButtonEnabled(_ isEnabled: Bool) {
@@ -100,23 +111,26 @@ extension PersonalInfoViewController: PersonalView {
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension PersonalInfoViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == nameTextField {
-            presenter.nameDidEndEditing(textField.text ?? "")
-        } else if textField == lastNameTextField {
-            presenter.lastNameDidEndEditing(textField.text ?? "")
-        } else {
-            presenter.phoneDidEndEditing(textField.text ?? "")
+        switch textField {
+        case nameField.textField:
+            presenter.nameDidEndEditing(nameField.text)
+        case lastNameField.textField:
+            presenter.lastNameDidEndEditing(lastNameField.text)
+        default:
+            presenter.phoneDidEndEditing(phoneField.text)
         }
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == nameTextField {
-            lastNameTextField.becomeFirstResponder()
-        } else if textField == lastNameTextField {
-            phoneTextField.becomeFirstResponder()
-        } else {
+        switch textField {
+        case nameField.textField:
+            lastNameField.textField.becomeFirstResponder()
+        case lastNameField.textField:
+            phoneField.textField.becomeFirstResponder()
+        default:
             textField.resignFirstResponder()
         }
         return true
@@ -126,7 +140,7 @@ extension PersonalInfoViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
-        guard textField == phoneTextField else { return true }
+        guard textField == phoneField.textField else { return true }
         guard string.allSatisfy({ $0.isASCII && $0.isNumber }) else { return false }
 
         let current = textField.text ?? ""

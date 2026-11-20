@@ -32,7 +32,19 @@ final class UserRepository: UserRepositoryProtocol {
         do {
             try await collection.document(user.id).setData(data, merge: true)
         } catch {
-            throw UserRepositoryError.saveFailed
+            print("Firestore no pudo guardar users/\(user.id): \(error)")
+            throw Self.mapError(error)
+        }
+    }
+
+    /// Códigos de FirestoreErrorDomain: 7 = sin permiso, 16 = sin sesión, 14 = servidor no disponible.
+    private static func mapError(_ error: Error) -> UserRepositoryError {
+        let nsError = error as NSError
+        guard nsError.domain == FirestoreErrorDomain else { return .saveFailed }
+        switch nsError.code {
+        case 7, 16: return .permissionDenied
+        case 14: return .unavailable
+        default: return .saveFailed
         }
     }
 
