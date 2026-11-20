@@ -107,6 +107,8 @@ final class PersonalInfoPresenter {
         // Respaldo: si Firestore no contesta, se quita el loader y se explica el problema.
         DispatchQueue.main.asyncAfter(deadline: .now() + saveTimeout) { [weak self] in
             guard let self, self.isSaving, self.saveAttempt == attempt else { return }
+            // Pista para desarrollo: suele pasar cuando la base (default) de Firestore no existe.
+            print("Firestore no respondió en \(Int(self.saveTimeout)) s. Verifica que exista la base de datos (default) en la consola de Firebase.")
             self.isSaving = false
             self.view?.manageLoader(false)
             self.view?.showErrorMessage("No pudimos guardar tus datos. Revisa tu conexión a internet e inténtalo de nuevo.")

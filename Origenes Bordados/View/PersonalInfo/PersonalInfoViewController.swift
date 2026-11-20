@@ -56,7 +56,6 @@ class PersonalInfoViewController: UIViewController {
             field?.textField.delegate = self
             field?.textField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         }
-        phoneField.textField.inputAccessoryView = makePhoneToolbar()
         saveButton.isEnabled = false
 
         view.addGestureRecognizer(DismissKeyboardTapGesture(hostView: view))
@@ -66,18 +65,6 @@ class PersonalInfoViewController: UIViewController {
     private func followKeyboard() {
         scrollBottomConstraint.isActive = false
         scrollView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor).isActive = true
-    }
-
-    // El teclado numérico no tiene tecla "Listo"
-    private func makePhoneToolbar() -> UIToolbar {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let spacer = UIBarButtonItem(systemItem: .flexibleSpace)
-        let done = UIBarButtonItem(systemItem: .done, primaryAction: UIAction { [weak self] _ in
-            self?.phoneField.textField.resignFirstResponder()
-        })
-        toolbar.items = [spacer, done]
-        return toolbar
     }
 
     // MARK: - Actions
