@@ -2,22 +2,26 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PersonalInfoViewController" customModule="Origenes_Bordados" customModuleProvider="target">
             <connections>
-                <outlet property="lastNameErrorLabel" destination="PIe-La-001" id="PIo-Le-001"/>
-                <outlet property="lastNameTextField" destination="PIf-La-001" id="PIo-Lf-001"/>
-                <outlet property="nameErrorLabel" destination="PIe-Na-001" id="PIo-Ne-001"/>
-                <outlet property="nameTextField" destination="PIf-Na-001" id="PIo-Nf-001"/>
-                <outlet property="phoneErrorLabel" destination="PIe-Ph-001" id="PIo-Pe-001"/>
-                <outlet property="phoneTextField" destination="PIf-Ph-001" id="PIo-Pf-001"/>
-                <outlet property="saveButton" destination="PIb-Sv-001" id="PIo-Sv-001"/>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="lastNameField" destination="vw-191-ob" id="ol-219-ob"/>
+                <outlet property="nameField" destination="vw-190-ob" id="ol-220-ob"/>
+                <outlet property="patternView" destination="vw-185-ob" id="ol-221-ob"/>
+                <outlet property="phoneField" destination="vw-192-ob" id="ol-222-ob"/>
+                <outlet property="saveButton" destination="vw-194-ob" id="ol-223-ob"/>
+                <outlet property="scrollBottomConstraint" destination="cn-215-ob" id="ol-224-ob"/>
+                <outlet property="scrollView" destination="vw-199-ob" id="ol-225-ob"/>
+                <outlet property="stepLabel" destination="vw-174-ob" id="ol-226-ob"/>
+                <outlet property="subtitleLabel" destination="vw-188-ob" id="ol-227-ob"/>
+                <outlet property="titleLabel" destination="vw-187-ob" id="ol-228-ob"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="ol-229-ob"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -25,124 +29,197 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="PIs-Sc-001">
-                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                <scrollView contentMode="scaleToFill" clipsSubviews="YES" multipleTouchEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="vw-199-ob">
+                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PIv-Ct-001">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="420"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vw-198-ob">
+                            <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PIk-St-001">
-                                    <rect key="frame" x="16" y="16" width="361" height="380"/>
+                                <stackView contentMode="scaleToFill" opaque="NO" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="vw-196-ob">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
                                     <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cuéntanos sobre ti" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIl-Ti-001">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="21"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                        <color key="textColor" systemColor="labelColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Con estos datos te contactaremos sobre tus piezas y pedidos." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIl-Su-001">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" systemColor="secondaryLabelColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nombre(s)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PIf-Na-001">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="PIf-Na-001-h"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next" textContentType="given-name"/>
-                                    </textField>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIe-Na-001">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="0.0"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" systemColor="systemRedColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Apellidos" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PIf-La-001">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="PIf-La-001-h"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next" textContentType="family-name"/>
-                                    </textField>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIe-La-001">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="0.0"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" systemColor="systemRedColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Teléfono (10 dígitos)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PIf-Ph-001">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="PIf-Ph-001-h"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="tel"/>
-                                    </textField>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIe-Ph-001">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="0.0"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" systemColor="systemRedColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIb-Sv-001">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="48"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="PIb-Sv-001-h"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Continuar"/>
-                                        <connections>
-                                            <action selector="requestSave:" destination="-1" eventType="touchUpInside" id="PIa-Sv-001"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
+                                        <stackView contentMode="scaleToFill" opaque="NO" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vw-183-ob">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="vw-173-ob">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="cn-172-ob"/>
+                                                    </constraints>
+                                                </view>
+                                                <stackView contentMode="scaleToFill" opaque="NO" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vw-182-ob">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paso 2 de 2" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vw-174-ob">
+                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                            <color key="textColor" name="accent"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stackView contentMode="scaleToFill" opaque="NO" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="vw-181-ob">
+                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vw-177-ob">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="24" id="cn-175-ob"/>
+                                                                        <constraint firstAttribute="height" constant="4" id="cn-176-ob"/>
+                                                                    </constraints>
+                                                                    <color key="backgroundColor" name="primary"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                            <real key="value" value="2"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vw-180-ob">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="24" id="cn-178-ob"/>
+                                                                        <constraint firstAttribute="height" constant="4" id="cn-179-ob"/>
+                                                                    </constraints>
+                                                                    <color key="backgroundColor" name="primary"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                            <real key="value" value="2"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </view>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="cn-184-ob"/>
+                                            </constraints>
+                                        </stackView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vw-185-ob" customClass="TalaveraPatternView" customModule="Origenes_Bordados" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="48" id="cn-186-ob"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="presetName" value="personalInfo"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="14"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <stackView contentMode="scaleToFill" opaque="NO" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vw-189-ob">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cuéntanos sobre ti." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vw-187-ob">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
+                                                    <color key="textColor" name="textPrimary"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Con estos datos te contactaremos sobre tus piezas y pedidos." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vw-188-ob">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" name="textSecondary"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView contentMode="scaleToFill" opaque="NO" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="vw-193-ob">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vw-190-ob" customClass="FormFieldView" customModule="Origenes_Bordados" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="caption" value="Nombre(s)"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Como aparece en tu identificación"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="kind" value="givenName"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vw-191-ob" customClass="FormFieldView" customModule="Origenes_Bordados" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="caption" value="Apellidos"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Paterno y materno"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="kind" value="familyName"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vw-192-ob" customClass="FormFieldView" customModule="Origenes_Bordados" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="caption" value="Teléfono"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="10 dígitos"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="kind" value="phone"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="hint" value="Celular de 10 dígitos, sin espacios."/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="prefix" value="+52"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </stackView>
+                                <stackView contentMode="scaleToFill" opaque="NO" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vw-197-ob">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vw-194-ob" customClass="PillButton" customModule="Origenes_Bordados" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="54" id="cn-195-ob"/>
+                                            </constraints>
+                                            <state key="normal" title="Continuar"/>
+                                            <connections>
+                                                <action selector="requestSave:" destination="-1" eventType="touchUpInside" id="ac-218-ob"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
                                 </stackView>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstItem="PIk-St-001" firstAttribute="top" secondItem="PIv-Ct-001" secondAttribute="top" constant="16" id="PIc-St-top"/>
-                                <constraint firstItem="PIk-St-001" firstAttribute="leading" secondItem="PIv-Ct-001" secondAttribute="leading" constant="16" id="PIc-St-lea"/>
-                                <constraint firstAttribute="trailing" secondItem="PIk-St-001" secondAttribute="trailing" constant="16" id="PIc-St-tra"/>
-                                <constraint firstAttribute="bottom" secondItem="PIk-St-001" secondAttribute="bottom" constant="24" id="PIc-St-bot"/>
+                                <constraint firstItem="vw-196-ob" firstAttribute="top" secondItem="vw-198-ob" secondAttribute="top" constant="12" id="cn-200-ob"/>
+                                <constraint firstItem="vw-196-ob" firstAttribute="leading" secondItem="vw-198-ob" secondAttribute="leading" constant="20" id="cn-201-ob"/>
+                                <constraint firstItem="vw-198-ob" firstAttribute="trailing" secondItem="vw-196-ob" secondAttribute="trailing" constant="20" id="cn-202-ob"/>
+                                <constraint firstItem="vw-197-ob" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vw-196-ob" secondAttribute="bottom" constant="24" id="cn-203-ob"/>
+                                <constraint firstItem="vw-197-ob" firstAttribute="leading" secondItem="vw-198-ob" secondAttribute="leading" constant="20" id="cn-204-ob"/>
+                                <constraint firstItem="vw-198-ob" firstAttribute="trailing" secondItem="vw-197-ob" secondAttribute="trailing" constant="20" id="cn-205-ob"/>
+                                <constraint firstItem="vw-198-ob" firstAttribute="bottom" secondItem="vw-197-ob" secondAttribute="bottom" constant="16" id="cn-206-ob"/>
                             </constraints>
                         </view>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="PIv-Ct-001" firstAttribute="top" secondItem="PIs-Sc-001" secondAttribute="top" id="PIc-Ct-top"/>
-                        <constraint firstItem="PIv-Ct-001" firstAttribute="leading" secondItem="PIs-Sc-001" secondAttribute="leading" id="PIc-Ct-lea"/>
-                        <constraint firstAttribute="trailing" secondItem="PIv-Ct-001" secondAttribute="trailing" id="PIc-Ct-tra"/>
-                        <constraint firstAttribute="bottom" secondItem="PIv-Ct-001" secondAttribute="bottom" id="PIc-Ct-bot"/>
-                        <constraint firstItem="PIv-Ct-001" firstAttribute="width" secondItem="PIs-Sc-001" secondAttribute="width" id="PIc-Ct-wid"/>
+                        <constraint firstItem="vw-198-ob" firstAttribute="top" secondItem="vw-199-ob" secondAttribute="top" id="cn-207-ob"/>
+                        <constraint firstItem="vw-198-ob" firstAttribute="leading" secondItem="vw-199-ob" secondAttribute="leading" id="cn-208-ob"/>
+                        <constraint firstItem="vw-199-ob" firstAttribute="trailing" secondItem="vw-198-ob" secondAttribute="trailing" id="cn-209-ob"/>
+                        <constraint firstItem="vw-199-ob" firstAttribute="bottom" secondItem="vw-198-ob" secondAttribute="bottom" id="cn-210-ob"/>
+                        <constraint firstItem="vw-198-ob" firstAttribute="width" secondItem="vw-199-ob" secondAttribute="width" id="cn-211-ob"/>
+                        <constraint firstItem="vw-198-ob" firstAttribute="height" relation="greaterThanOrEqual" secondItem="vw-199-ob" secondAttribute="height" id="cn-212-ob"/>
+                        <constraint firstItem="vw-198-ob" firstAttribute="height" secondItem="vw-199-ob" secondAttribute="height" priority="250" id="cn-213-ob"/>
                     </constraints>
                 </scrollView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" name="mainBackground"/>
             <constraints>
-                <constraint firstItem="PIs-Sc-001" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="PIc-Sc-top"/>
-                <constraint firstItem="PIs-Sc-001" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="PIc-Sc-lea"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PIs-Sc-001" secondAttribute="trailing" id="PIc-Sc-tra"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="PIs-Sc-001" secondAttribute="bottom" id="PIc-Sc-bot"/>
+                <constraint firstItem="vw-199-ob" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="cn-214-ob"/>
+                <constraint firstItem="vw-199-ob" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cn-216-ob"/>
+                <constraint firstItem="i5M-Pr-FkT" firstAttribute="trailing" secondItem="vw-199-ob" secondAttribute="trailing" id="cn-217-ob"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="vw-199-ob" secondAttribute="bottom" id="cn-215-ob"/>
             </constraints>
             <point key="canvasLocation" x="138" y="117"/>
         </view>
     </objects>
     <resources>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <namedColor name="accent">
+            <color red="0.650980" green="0.227451" blue="0.376471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mainBackground">
+            <color red="0.980392" green="0.972549" blue="0.945098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="primary">
+            <color red="0.227451" green="0.400000" blue="0.278431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="textPrimary">
+            <color red="0.109804" green="0.133333" blue="0.094118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="textSecondary">
+            <color red="0.333333" green="0.360784" blue="0.301961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

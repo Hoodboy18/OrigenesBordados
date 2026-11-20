@@ -55,16 +55,24 @@ final class FirebaseAuthRepository: AuthRepositoryProtocol {
         User(id: fbUser.uid, email: fbUser.email ?? "")
     }
 
+    /// Firebase entrega sus errores como NSError con dominio "FIRAuthErrorDomain";
+    /// se leen por su código numérico para no perder el motivo real.
     private static func mapError(_ error: Error) -> AuthError {
-        guard let code = AuthErrorCode(_bridgedNSError: error as NSError) else {
+        let nsError = error as NSError
+        guard nsError.domain == AuthErrors.domain,
+              let code = AuthErrorCode(rawValue: nsError.code) else {
             return .unknown
         }
 
-        switch code.code {
+        switch code {
         case .wrongPassword, .userNotFound, .invalidCredential:
             return .invalidCredentials
         case .emailAlreadyInUse:
             return .emailAlreadyInUse
+        case .invalidEmail:
+            return .invalidEmail
+        case .weakPassword:
+            return .weakPassword
         case .networkError:
             return .network
         default:

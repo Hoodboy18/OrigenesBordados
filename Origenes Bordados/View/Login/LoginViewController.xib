@@ -11,15 +11,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Origenes_Bordados" customModuleProvider="target">
             <connections>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="emailTextField" destination="4B5-Ij-CSK" id="5Ev-F1-X7d"/>
-                <outlet property="passwordTextField" destination="onv-VS-ZVd" id="nBg-xu-9NE"/>
-                <outlet property="loginButton" destination="zos-vg-3pC" id="m2n-gg-4Pm"/>
-                <outlet property="emailErrorLabel" destination="a4C-0a-1Xe" id="115-Uu-VLL"/>
-                <outlet property="passwordErrorLabel" destination="EYY-iq-4gh" id="5YW-WS-0AH"/>
-                <outlet property="gradientView" destination="GRD-view-001" id="out-gradient"/>
-                <outlet property="scrollView" destination="SCR-main-001" id="out-scroll"/>
-                <outlet property="loginCard" destination="CRD-login-001" id="out-login-card"/>
+                <outlet property="backButton" destination="vw-48-ob" id="ol-93-ob"/>
+                <outlet property="emailField" destination="vw-61-ob" id="ol-94-ob"/>
+                <outlet property="loginButton" destination="vw-64-ob" id="ol-95-ob"/>
+                <outlet property="noticeView" destination="vw-60-ob" id="ol-96-ob"/>
+                <outlet property="passwordField" destination="vw-62-ob" id="ol-97-ob"/>
+                <outlet property="patternView" destination="vw-55-ob" id="ol-98-ob"/>
+                <outlet property="scrollBottomConstraint" destination="cn-87-ob" id="ol-99-ob"/>
+                <outlet property="scrollView" destination="vw-71-ob" id="ol-100-ob"/>
+                <outlet property="signUpLinkButton" destination="vw-66-ob" id="ol-101-ob"/>
+                <outlet property="subtitleLabel" destination="vw-58-ob" id="ol-102-ob"/>
+                <outlet property="titleLabel" destination="vw-57-ob" id="ol-103-ob"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="ol-104-ob"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -27,256 +30,163 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <!-- Capa gradiente (los blobs se dibujan en código) -->
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GRD-view-001">
-                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                    <color key="backgroundColor" name="gradientTop"/>
-                </view>
-
-                <!-- Scroll para pantallas pequeñas y teclado -->
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="SCR-main-001">
-                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                <scrollView contentMode="scaleToFill" clipsSubviews="YES" multipleTouchEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="vw-71-ob">
+                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CNT-form-001">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vw-70-ob">
+                            <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
                             <subviews>
-                                <!-- HEADER editorial -->
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hola de&#10;nuevo." textAlignment="left" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTL-head-001">
-                                    <rect key="frame" x="24" y="140" width="345" height="96"/>
-                                    <fontDescription key="fontDescription" type="system" weight="bold" pointSize="40"/>
-                                    <color key="textColor" name="textPrimary"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nos alegra verte otra vez." textAlignment="left" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SUB-head-001">
-                                    <rect key="frame" x="24" y="248" width="345" height="22"/>
-                                    <fontDescription key="fontDescription" type="system" weight="regular" pointSize="16"/>
-                                    <color key="textColor" name="textSecondary"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-
-                                <!-- CARD LOGIN flotante -->
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CRD-login-001">
-                                    <rect key="frame" x="20" y="300" width="353" height="380"/>
+                                <stackView contentMode="scaleToFill" opaque="NO" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="vw-68-ob">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
                                     <subviews>
-                                        <!-- Chip -->
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  INICIA SESIÓN  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHIP-login-001">
-                                            <rect key="frame" x="24" y="24" width="112" height="24"/>
+                                        <stackView contentMode="scaleToFill" opaque="NO" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vw-53-ob">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vw-48-ob">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="44" id="cn-49-ob"/>
+                                                        <constraint firstAttribute="height" constant="44" id="cn-50-ob"/>
+                                                    </constraints>
+                                                    <state key="normal" title=""/>
+                                                    <connections>
+                                                        <action selector="goBack:" destination="-1" eventType="touchUpInside" id="ac-90-ob"/>
+                                                    </connections>
+                                                </button>
+                                                <view contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="vw-52-ob">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="cn-51-ob"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="24" id="chiplogin-h"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="cn-54-ob"/>
                                             </constraints>
-                                            <color key="backgroundColor" name="primary"/>
-                                            <fontDescription key="fontDescription" type="system" weight="bold" pointSize="11"/>
-                                            <color key="textColor" name="textPrimary"/>
-                                            <nil key="highlightedColor"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <real key="value" value="12"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </label>
-
-                                        <!-- Email -->
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Correo electrónico" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="4B5-Ij-CSK">
-                                            <rect key="frame" x="24" y="72" width="305" height="52"/>
+                                        </stackView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vw-55-ob" customClass="TalaveraPatternView" customModule="Origenes_Bordados" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="52" id="email-h"/>
+                                                <constraint firstAttribute="height" constant="48" id="cn-56-ob"/>
                                             </constraints>
-                                            <color key="backgroundColor" name="inputFill"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" name="textPrimary"/>
-                                            <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="emailAddress" returnKeyType="next" autocapitalizationType="none" autocorrectionType="no"/>
                                             <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <real key="value" value="18"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </textField>
-
-                                        <!-- Email error -->
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="left" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4C-0a-1Xe">
-                                            <rect key="frame" x="28" y="128" width="297" height="0.0"/>
-                                            <fontDescription key="fontDescription" type="system" weight="regular" pointSize="12"/>
-                                            <color key="textColor" name="accent"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-
-                                        <!-- Password -->
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Contraseña" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="onv-VS-ZVd">
-                                            <rect key="frame" x="24" y="140" width="305" height="52"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="52" id="pass-h"/>
-                                            </constraints>
-                                            <color key="backgroundColor" name="inputFill"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" name="textPrimary"/>
-                                            <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password" returnKeyType="done"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <real key="value" value="18"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="presetName" value="login"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="14"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
-                                        </textField>
-
-                                        <!-- Password error -->
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="left" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EYY-iq-4gh">
-                                            <rect key="frame" x="28" y="196" width="297" height="0.0"/>
-                                            <fontDescription key="fontDescription" type="system" weight="regular" pointSize="12"/>
-                                            <color key="textColor" name="accent"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-
-                                        <!-- Botón login -->
-                                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zos-vg-3pC">
-                                            <rect key="frame" x="24" y="220" width="305" height="56"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="56" id="login-btn-h"/>
-                                            </constraints>
-                                            <color key="backgroundColor" name="primary"/>
-                                            <fontDescription key="fontDescription" type="system" weight="bold" pointSize="17"/>
-                                            <state key="normal" title="Iniciar sesión">
-                                                <color key="titleColor" name="textPrimary"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="requestLogin:" destination="-1" eventType="touchUpInside" id="iw7-Oe-xfI"/>
-                                            </connections>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <real key="value" value="28"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </button>
-
-                                        <!-- Footer -->
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¿No tienes cuenta? Regístrate" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FTR-register-001">
-                                            <rect key="frame" x="24" y="296" width="305" height="18"/>
-                                            <fontDescription key="fontDescription" type="system" weight="regular" pointSize="14"/>
-                                            <color key="textColor" name="textSecondary"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        </view>
+                                        <stackView contentMode="scaleToFill" opaque="NO" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vw-59-ob">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hola de nuevo." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vw-57-ob">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
+                                                    <color key="textColor" name="textPrimary"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingresa a tu cuenta de Orígenes Bordados." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vw-58-ob">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" name="textSecondary"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView contentMode="scaleToFill" opaque="NO" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="vw-63-ob">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                            <subviews>
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vw-60-ob" customClass="NoticeView" customModule="Origenes_Bordados" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vw-61-ob" customClass="FormFieldView" customModule="Origenes_Bordados" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="caption" value="Correo electrónico"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="nombre@correo.com"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="kind" value="email"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vw-62-ob" customClass="FormFieldView" customModule="Origenes_Bordados" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="caption" value="Contraseña"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Tu contraseña"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="kind" value="password"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
-                                    <color key="backgroundColor" name="cardSurface"/>
-                                    <constraints>
-                                        <constraint firstItem="CHIP-login-001" firstAttribute="top" secondItem="CRD-login-001" secondAttribute="top" constant="24" id="chip-top"/>
-                                        <constraint firstItem="CHIP-login-001" firstAttribute="leading" secondItem="CRD-login-001" secondAttribute="leading" constant="24" id="chip-lead"/>
-
-                                        <constraint firstItem="4B5-Ij-CSK" firstAttribute="top" secondItem="CHIP-login-001" secondAttribute="bottom" constant="24" id="email-top"/>
-                                        <constraint firstItem="4B5-Ij-CSK" firstAttribute="leading" secondItem="CRD-login-001" secondAttribute="leading" constant="24" id="email-lead"/>
-                                        <constraint firstAttribute="trailing" secondItem="4B5-Ij-CSK" secondAttribute="trailing" constant="24" id="email-trail"/>
-
-                                        <constraint firstItem="a4C-0a-1Xe" firstAttribute="top" secondItem="4B5-Ij-CSK" secondAttribute="bottom" constant="4" id="emailerr-top"/>
-                                        <constraint firstItem="a4C-0a-1Xe" firstAttribute="leading" secondItem="CRD-login-001" secondAttribute="leading" constant="28" id="emailerr-lead"/>
-                                        <constraint firstAttribute="trailing" secondItem="a4C-0a-1Xe" secondAttribute="trailing" constant="28" id="emailerr-trail"/>
-
-                                        <constraint firstItem="onv-VS-ZVd" firstAttribute="top" secondItem="a4C-0a-1Xe" secondAttribute="bottom" constant="8" id="pass-top"/>
-                                        <constraint firstItem="onv-VS-ZVd" firstAttribute="leading" secondItem="CRD-login-001" secondAttribute="leading" constant="24" id="pass-lead"/>
-                                        <constraint firstAttribute="trailing" secondItem="onv-VS-ZVd" secondAttribute="trailing" constant="24" id="pass-trail"/>
-
-                                        <constraint firstItem="EYY-iq-4gh" firstAttribute="top" secondItem="onv-VS-ZVd" secondAttribute="bottom" constant="4" id="passerr-top"/>
-                                        <constraint firstItem="EYY-iq-4gh" firstAttribute="leading" secondItem="CRD-login-001" secondAttribute="leading" constant="28" id="passerr-lead"/>
-                                        <constraint firstAttribute="trailing" secondItem="EYY-iq-4gh" secondAttribute="trailing" constant="28" id="passerr-trail"/>
-
-                                        <constraint firstItem="zos-vg-3pC" firstAttribute="top" secondItem="EYY-iq-4gh" secondAttribute="bottom" constant="24" id="loginbtn-top"/>
-                                        <constraint firstItem="zos-vg-3pC" firstAttribute="leading" secondItem="CRD-login-001" secondAttribute="leading" constant="24" id="loginbtn-lead"/>
-                                        <constraint firstAttribute="trailing" secondItem="zos-vg-3pC" secondAttribute="trailing" constant="24" id="loginbtn-trail"/>
-
-                                        <constraint firstItem="FTR-register-001" firstAttribute="top" secondItem="zos-vg-3pC" secondAttribute="bottom" constant="20" id="ftr-top"/>
-                                        <constraint firstItem="FTR-register-001" firstAttribute="leading" secondItem="CRD-login-001" secondAttribute="leading" constant="24" id="ftr-lead"/>
-                                        <constraint firstAttribute="trailing" secondItem="FTR-register-001" secondAttribute="trailing" constant="24" id="ftr-trail"/>
-                                        <constraint firstAttribute="bottom" secondItem="FTR-register-001" secondAttribute="bottom" constant="24" id="card-bottom"/>
-                                    </constraints>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <real key="value" value="32"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </view>
-
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SPC-bottom-001">
-                                    <rect key="frame" x="0.0" y="720" width="393" height="48"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="48" id="spc-bottom-h"/>
-                                    </constraints>
-                                </view>
+                                </stackView>
+                                <stackView contentMode="scaleToFill" opaque="NO" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vw-69-ob">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vw-64-ob" customClass="PillButton" customModule="Origenes_Bordados" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="54" id="cn-65-ob"/>
+                                            </constraints>
+                                            <state key="normal" title="Iniciar sesión"/>
+                                            <connections>
+                                                <action selector="requestLogin:" destination="-1" eventType="touchUpInside" id="ac-91-ob"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vw-66-ob">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="cn-67-ob"/>
+                                            </constraints>
+                                            <state key="normal" title="¿No tienes cuenta? Regístrate aquí"/>
+                                            <connections>
+                                                <action selector="showSignUp:" destination="-1" eventType="touchUpInside" id="ac-92-ob"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="TTL-head-001" firstAttribute="top" secondItem="CNT-form-001" secondAttribute="top" constant="140" id="ttl-top"/>
-                                <constraint firstItem="TTL-head-001" firstAttribute="leading" secondItem="CNT-form-001" secondAttribute="leading" constant="24" id="ttl-lead"/>
-                                <constraint firstAttribute="trailing" secondItem="TTL-head-001" secondAttribute="trailing" constant="24" id="ttl-trail"/>
-
-                                <constraint firstItem="SUB-head-001" firstAttribute="top" secondItem="TTL-head-001" secondAttribute="bottom" constant="12" id="sub-top"/>
-                                <constraint firstItem="SUB-head-001" firstAttribute="leading" secondItem="CNT-form-001" secondAttribute="leading" constant="24" id="sub-lead"/>
-                                <constraint firstAttribute="trailing" secondItem="SUB-head-001" secondAttribute="trailing" constant="24" id="sub-trail"/>
-
-                                <constraint firstItem="CRD-login-001" firstAttribute="top" secondItem="SUB-head-001" secondAttribute="bottom" constant="40" id="card-top"/>
-                                <constraint firstItem="CRD-login-001" firstAttribute="leading" secondItem="CNT-form-001" secondAttribute="leading" constant="20" id="card-lead"/>
-                                <constraint firstAttribute="trailing" secondItem="CRD-login-001" secondAttribute="trailing" constant="20" id="card-trail"/>
-
-                                <constraint firstItem="SPC-bottom-001" firstAttribute="top" secondItem="CRD-login-001" secondAttribute="bottom" constant="40" id="spc-top"/>
-                                <constraint firstItem="SPC-bottom-001" firstAttribute="leading" secondItem="CNT-form-001" secondAttribute="leading" id="spc-lead"/>
-                                <constraint firstAttribute="trailing" secondItem="SPC-bottom-001" secondAttribute="trailing" id="spc-trail"/>
-                                <constraint firstAttribute="bottom" secondItem="SPC-bottom-001" secondAttribute="bottom" id="spc-bottom"/>
+                                <constraint firstItem="vw-68-ob" firstAttribute="top" secondItem="vw-70-ob" secondAttribute="top" constant="12" id="cn-72-ob"/>
+                                <constraint firstItem="vw-68-ob" firstAttribute="leading" secondItem="vw-70-ob" secondAttribute="leading" constant="20" id="cn-73-ob"/>
+                                <constraint firstItem="vw-70-ob" firstAttribute="trailing" secondItem="vw-68-ob" secondAttribute="trailing" constant="20" id="cn-74-ob"/>
+                                <constraint firstItem="vw-69-ob" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vw-68-ob" secondAttribute="bottom" constant="24" id="cn-75-ob"/>
+                                <constraint firstItem="vw-69-ob" firstAttribute="leading" secondItem="vw-70-ob" secondAttribute="leading" constant="20" id="cn-76-ob"/>
+                                <constraint firstItem="vw-70-ob" firstAttribute="trailing" secondItem="vw-69-ob" secondAttribute="trailing" constant="20" id="cn-77-ob"/>
+                                <constraint firstItem="vw-70-ob" firstAttribute="bottom" secondItem="vw-69-ob" secondAttribute="bottom" constant="16" id="cn-78-ob"/>
                             </constraints>
                         </view>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="CNT-form-001" firstAttribute="top" secondItem="SCR-main-001" secondAttribute="top" id="scr-cnt-top"/>
-                        <constraint firstItem="CNT-form-001" firstAttribute="leading" secondItem="SCR-main-001" secondAttribute="leading" id="scr-cnt-lead"/>
-                        <constraint firstAttribute="trailing" secondItem="CNT-form-001" secondAttribute="trailing" id="scr-cnt-trail"/>
-                        <constraint firstAttribute="bottom" secondItem="CNT-form-001" secondAttribute="bottom" id="scr-cnt-bottom"/>
-                        <constraint firstItem="CNT-form-001" firstAttribute="width" secondItem="SCR-main-001" secondAttribute="width" id="scr-cnt-width"/>
+                        <constraint firstItem="vw-70-ob" firstAttribute="top" secondItem="vw-71-ob" secondAttribute="top" id="cn-79-ob"/>
+                        <constraint firstItem="vw-70-ob" firstAttribute="leading" secondItem="vw-71-ob" secondAttribute="leading" id="cn-80-ob"/>
+                        <constraint firstItem="vw-71-ob" firstAttribute="trailing" secondItem="vw-70-ob" secondAttribute="trailing" id="cn-81-ob"/>
+                        <constraint firstItem="vw-71-ob" firstAttribute="bottom" secondItem="vw-70-ob" secondAttribute="bottom" id="cn-82-ob"/>
+                        <constraint firstItem="vw-70-ob" firstAttribute="width" secondItem="vw-71-ob" secondAttribute="width" id="cn-83-ob"/>
+                        <constraint firstItem="vw-70-ob" firstAttribute="height" relation="greaterThanOrEqual" secondItem="vw-71-ob" secondAttribute="height" id="cn-84-ob"/>
+                        <constraint firstItem="vw-70-ob" firstAttribute="height" secondItem="vw-71-ob" secondAttribute="height" priority="250" id="cn-85-ob"/>
                     </constraints>
                 </scrollView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="mainBackground"/>
             <constraints>
-                <constraint firstItem="GRD-view-001" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="grd-top"/>
-                <constraint firstItem="GRD-view-001" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="grd-lead"/>
-                <constraint firstAttribute="trailing" secondItem="GRD-view-001" secondAttribute="trailing" id="grd-trail"/>
-                <constraint firstAttribute="bottom" secondItem="GRD-view-001" secondAttribute="bottom" id="grd-bottom"/>
-
-                <constraint firstItem="SCR-main-001" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="scr-top"/>
-                <constraint firstItem="SCR-main-001" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="scr-lead"/>
-                <constraint firstAttribute="trailing" secondItem="SCR-main-001" secondAttribute="trailing" id="scr-trail"/>
-                <constraint firstAttribute="bottom" secondItem="SCR-main-001" secondAttribute="bottom" id="scr-bottom"/>
+                <constraint firstItem="vw-71-ob" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="cn-86-ob"/>
+                <constraint firstItem="vw-71-ob" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cn-88-ob"/>
+                <constraint firstItem="i5M-Pr-FkT" firstAttribute="trailing" secondItem="vw-71-ob" secondAttribute="trailing" id="cn-89-ob"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="vw-71-ob" secondAttribute="bottom" id="cn-87-ob"/>
             </constraints>
             <point key="canvasLocation" x="138" y="117"/>
         </view>
     </objects>
     <resources>
         <namedColor name="mainBackground">
-            <color red="0.99607843137254903" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.980392" green="0.972549" blue="0.945098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="textPrimary">
-            <color red="0.36078431372549019" green="0.36078431372549019" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.109804" green="0.133333" blue="0.094118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="textSecondary">
-            <color red="0.55294117647058827" green="0.55294117647058827" blue="0.55294117647058827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="primary">
-            <color red="0.76470588235294112" green="0.81960784313725488" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="secondary">
-            <color red="0.94901960784313721" green="0.93333333333333335" blue="0.70196078431372544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="accent">
-            <color red="0.70980392156862748" green="0.396078431372549" blue="0.11372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="gradientTop">
-            <color red="0.96862745098039216" green="0.97254901960784312" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="gradientBottom">
-            <color red="0.9137254901960784" green="0.93333333333333335" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="cardSurface">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="inputFill">
-            <color red="0.96078431372549022" green="0.95294117647058818" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="shadowTint">
-            <color red="0.36078431372549019" green="0.36078431372549019" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.333333" green="0.360784" blue="0.301961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

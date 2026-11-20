@@ -12,47 +12,102 @@ final class AppCoordinator {
 
     private let navigationController: UINavigationController
     private let factory: ViewControllerFactory
+    private let swipeBackDelegate: SwipeBackDelegate
 
     init(navigationController: UINavigationController, factory: ViewControllerFactory) {
         self.navigationController = navigationController
         self.factory = factory
+        self.swipeBackDelegate = SwipeBackDelegate(navigationController: navigationController)
     }
 
     func start() {
+        // Las pantallas traen su propio botón de regresar, así que se oculta la barra.
+        navigationController.setNavigationBarHidden(true, animated: false)
+        navigationController.interactivePopGestureRecognizer?.delegate = swipeBackDelegate
+
         // Welcome es la primera pantalla
-        let viewController = factory.makeWelcomeViewController(
+        navigationController.setViewControllers([makeWelcome()], animated: false)
+    }
+
+    private func makeWelcome() -> UIViewController {
+        factory.makeWelcomeViewController(
             onShowLogin: { [weak self] in self?.showLogin() },
             onShowSignUp: { [weak self] in self?.showSignUp() }
         )
-        navigationController.setViewControllers([viewController], animated: false)
     }
 
-    private func showLogin() {
-        let viewController = factory.makeLoginViewController { [weak self] in
-            self?.showHome()
-        }
-        navigationController.pushViewController(viewController, animated: true)
+    private func makeLogin(prefilledEmail: String? = nil, notice: String? = nil) -> UIViewController {
+        factory.makeLoginViewController(
+            prefilledEmail: prefilledEmail,
+            notice: notice,
+            onLoginSuccess: { [weak self] in self?.showHome() },
+            onBack: { [weak self] in self?.navigationController.popViewController(animated: true) },
+            onShowSignUp: { [weak self] in self?.showSignUp(replacingCurrent: true) }
+        )
     }
 
-    private func showSignUp() {
+    private func showLogin(replacingCurrent: Bool = false) {
+        show(makeLogin(), replacingCurrent: replacingCurrent)
+    }
+
+    private func showSignUp(replacingCurrent: Bool = false) {
         let viewController = factory.makeSignUpViewController(
             onSignUpSuccess: { [weak self] in self?.showPersonalInfo() },
-            onBack: { [weak self] in self?.navigationController.popViewController(animated: true) }
+            onBack: { [weak self] in self?.navigationController.popViewController(animated: true) },
+            onShowLogin: { [weak self] in self?.showLogin(replacingCurrent: true) }
         )
-        navigationController.pushViewController(viewController, animated: true)
+        show(viewController, replacingCurrent: replacingCurrent)
     }
 
     private func showPersonalInfo() {
-        let viewController = factory.makePersonalInfoViewController { [weak self] in
-            self?.showHome()
+        let viewController = factory.makePersonalInfoViewController { [weak self] email in
+            self?.showLoginAfterSignUp(email: email)
         }
-        navigationController.pushViewController(viewController, animated: true)
+        // La cuenta ya existe: PersonalInfo queda como única pantalla, sin regreso a SignUp.
+        navigationController.setViewControllers([viewController], animated: true)
+    }
+
+    /// Al terminar el registro: Welcome → Login con el correo precargado y un aviso.
+    private func showLoginAfterSignUp(email: String) {
+        let login = makeLogin(prefilledEmail: email,
+                              notice: "¡Tu cuenta está lista! Inicia sesión para continuar.")
+        navigationController.setViewControllers([makeWelcome(), login], animated: true)
     }
 
     private func showHome() {
-        // Pendiente: aquí crearás el Home cuando lo tengas.
-        // Por ahora solo confirmamos que el flujo llega.
-        print("Sesión lista → ir a Home (pendiente)")
+        // Pendiente: aquí se mostrará el Home cuando exista.
+        // Mientras tanto se confirma al usuario que sí inició sesión.
+        let alert = UIAlertController(title: "¡Bienvenida, bienvenido!",
+                                      message: "Iniciaste sesión correctamente. La pantalla de inicio estará lista pronto.",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .default))
+        navigationController.topViewController?.present(alert, animated: true)
+    }
+
+    /// Login ↔ SignUp se reemplazan entre sí para que "Regresar" siempre lleve a Welcome.
+    private func show(_ viewController: UIViewController, replacingCurrent: Bool) {
+        guard replacingCurrent, navigationController.viewControllers.count > 1 else {
+            navigationController.pushViewController(viewController, animated: true)
+            return
+        }
+        var stack = navigationController.viewControllers
+        stack[stack.count - 1] = viewController
+        navigationController.setViewControllers(stack, animated: true)
+    }
+}
+
+// MARK: - Gesto de deslizar para regresar
+/// Con la barra de navegación oculta, iOS desactiva el gesto de regresar;
+/// este delegado lo vuelve a activar cuando hay una pantalla a la cual volver.
+private final class SwipeBackDelegate: NSObject, UIGestureRecognizerDelegate {
+    private weak var navigationController: UINavigationController?
+
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
+
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        (navigationController?.viewControllers.count ?? 0) > 1
     }
 }
 
@@ -60,10 +115,15 @@ final class AppCoordinator {
 protocol ViewControllerFactory {
     func makeWelcomeViewController(onShowLogin: @escaping () -> Void,
                                    onShowSignUp: @escaping () -> Void) -> UIViewController
-    func makeLoginViewController(onLoginSuccess: @escaping () -> Void) -> UIViewController
+    func makeLoginViewController(prefilledEmail: String?,
+                                 notice: String?,
+                                 onLoginSuccess: @escaping () -> Void,
+                                 onBack: @escaping () -> Void,
+                                 onShowSignUp: @escaping () -> Void) -> UIViewController
     func makeSignUpViewController(onSignUpSuccess: @escaping () -> Void,
-                                  onBack: @escaping () -> Void) -> UIViewController
-    func makePersonalInfoViewController(onSavedPersonalInfo: @escaping () -> Void) -> UIViewController
+                                  onBack: @escaping () -> Void,
+                                  onShowLogin: @escaping () -> Void) -> UIViewController
+    func makePersonalInfoViewController(onSavedPersonalInfo: @escaping (String) -> Void) -> UIViewController
 }
 
 // MARK: - DI Container
@@ -76,19 +136,29 @@ final class AppDIContainer: ViewControllerFactory {
         return WelcomeViewController(presenter: presenter)
     }
 
-    func makeLoginViewController(onLoginSuccess: @escaping () -> Void) -> UIViewController {
+    func makeLoginViewController(prefilledEmail: String?,
+                                 notice: String?,
+                                 onLoginSuccess: @escaping () -> Void,
+                                 onBack: @escaping () -> Void,
+                                 onShowSignUp: @escaping () -> Void) -> UIViewController {
         let presenter = LoginPresenter(onLoginSuccess: onLoginSuccess,
+                                       onBack: onBack,
+                                       onShowSignUp: onShowSignUp,
                                        validator: LoginValidator(),
-                                       authRepository: FirebaseAuthRepository())
+                                       authRepository: FirebaseAuthRepository(),
+                                       prefilledEmail: prefilledEmail,
+                                       notice: notice)
         let viewController = LoginViewController(presenter: presenter)
         presenter.view = viewController
         return viewController
     }
 
     func makeSignUpViewController(onSignUpSuccess: @escaping () -> Void,
-                                  onBack: @escaping () -> Void) -> UIViewController {
+                                  onBack: @escaping () -> Void,
+                                  onShowLogin: @escaping () -> Void) -> UIViewController {
         let presenter = SignUpPresenter(onSignUpSuccess: onSignUpSuccess,
                                         onBack: onBack,
+                                        onShowLogin: onShowLogin,
                                         validator: LoginValidator(),
                                         authRepository: FirebaseAuthRepository())
         let viewController = SignUpViewController(presenter: presenter)
@@ -96,7 +166,7 @@ final class AppDIContainer: ViewControllerFactory {
         return viewController
     }
 
-    func makePersonalInfoViewController(onSavedPersonalInfo: @escaping () -> Void) -> UIViewController {
+    func makePersonalInfoViewController(onSavedPersonalInfo: @escaping (String) -> Void) -> UIViewController {
         let presenter = PersonalInfoPresenter(authRepository: FirebaseAuthRepository(),
                                               userRepository: UserRepository(),
                                               validator: PersonalInfoValidator(),

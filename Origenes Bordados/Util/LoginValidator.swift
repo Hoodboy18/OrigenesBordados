@@ -12,6 +12,7 @@ enum ValidationError: Equatable {
     case invalidFormat
     case tooShort(min: Int)
     case invalidPhone(digits: Int)
+    case mismatch
     
     var message: String {
         switch self{
@@ -23,6 +24,8 @@ enum ValidationError: Equatable {
             return "Debe tener al menos \(min) caracteres"
         case .invalidPhone(digits: let digits):
             return "Ingresa un número de \(digits) dígitos"
+        case .mismatch:
+            return "Los valores no coinciden"
         }
     }
 }
@@ -30,6 +33,7 @@ enum ValidationError: Equatable {
 protocol LoginValidatorProtocol {
     func validateEmail (_ email: String) -> ValidationError?
     func validatePassword (_ password: String) -> ValidationError?
+    func validatePasswordConfirmation(_ confirmation: String, password: String) -> ValidationError?
 }
 
 struct LoginValidator: LoginValidatorProtocol {
@@ -51,5 +55,9 @@ struct LoginValidator: LoginValidatorProtocol {
         }
         return nil
     }
-    
+
+    func validatePasswordConfirmation(_ confirmation: String, password: String) -> ValidationError? {
+        guard !confirmation.isEmpty else { return .empty }
+        return confirmation == password ? nil : .mismatch
+    }
 }
